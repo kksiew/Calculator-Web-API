@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "63b1a8d2-1c25-484a-99a4-1b55576b4764",
+		"name": "Calculator Web API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Calculate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sum\":\"1.1 + ( ( 2 + 3 * ( 7 - 5 ) - 1 ) / 2 ) * 3 - 2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44324/api/Calculator/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Calculator",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sum\":\"A + B + C\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44324/api/Calculator/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Calculator",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
