@@ -1,6 +1,7 @@
 ﻿using Calculator.Interfaces;
 using Calculator.Models;
 using Calculator.Utilities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
@@ -8,6 +9,13 @@ namespace Calculator.Services
 {
     public class CalculateService : ICalculateService
     {
+        private readonly IConfiguration _configuration;
+
+        public CalculateService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         /// <summary>
         /// Main calculation engine
         /// </summary>
@@ -76,7 +84,10 @@ namespace Calculator.Services
             }
 
             if (tokenList.First.Value != null)
-                result = Math.Round(tokenList.First.Value.Number, 5);
+            {
+                int roundToDecimal = int.Parse(_configuration.GetSection("RoundToDecimal").Value);
+                result = Math.Round(tokenList.First.Value.Number, roundToDecimal);
+            }
 
             return result;
         }

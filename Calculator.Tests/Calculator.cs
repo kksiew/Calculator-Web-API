@@ -3,19 +3,26 @@ using Calculator.Utilities;
 using Calculator.Services;
 using System.Collections.Generic;
 using Calculator.Models;
+using Microsoft.Extensions.Configuration;
+using Calculator.Interfaces;
 
 namespace Calculate.Services.Tests
 {
     public class Calculator_Tests
     {
-        private readonly CalculateService _calculateService;
-        private readonly ValidationService _validationService;
-        private readonly Parser _parser;
+        private readonly ICalculateService _calculateService;
+        private readonly IValidationService _validationService;
+        private readonly IParser _parser;
 
         public Calculator_Tests()
         {
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
+
             _parser = new Parser();
-            _calculateService = new CalculateService();
+            _calculateService = new CalculateService(configuration);
             _validationService = new ValidationService();
         }
 
