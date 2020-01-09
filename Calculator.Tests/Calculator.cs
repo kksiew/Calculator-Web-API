@@ -27,7 +27,31 @@ namespace Calculate.Services.Tests
         }
 
         [Test]
-        public void Calculate_Simple_Return_Correct_Value()
+        public void Test_Case_1()
+        {
+            // "1 + 1"
+            LinkedList<Token> testLinkedList = new LinkedList<Token>();
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 1, Operation = Operation.Number });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 0, Operation = Operation.Add });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 1, Operation = Operation.Number });
+            double result = _calculateService.Calculate(testLinkedList, 0);
+            Assert.AreEqual(2, result);
+        }
+
+        [Test]
+        public void Test_Case_2()
+        {
+            // "2 * 2"
+            LinkedList<Token> testLinkedList = new LinkedList<Token>();
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 2, Operation = Operation.Number });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 0, Operation = Operation.Multiply });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 2, Operation = Operation.Number });
+            double result = _calculateService.Calculate(testLinkedList, 0);
+            Assert.AreEqual(4, result);
+        }
+
+        [Test]
+        public void Test_Case_3()
         {
             // "1 + 2 + 3"
             LinkedList<Token> testLinkedList = new LinkedList<Token>();
@@ -41,7 +65,71 @@ namespace Calculate.Services.Tests
         }
 
         [Test]
-        public void Calculate_Bracket_Return_Correct_Value()
+        public void Test_Case_4()
+        {
+            // "6 / 2"
+            LinkedList<Token> testLinkedList = new LinkedList<Token>();
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 6, Operation = Operation.Number });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 0, Operation = Operation.Divide });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 2, Operation = Operation.Number });
+            double result = _calculateService.Calculate(testLinkedList, 0);
+            Assert.AreEqual(3, result);
+        }
+
+        [Test]
+        public void Test_Case_5()
+        {
+            // "11 + 23"
+            LinkedList<Token> testLinkedList = new LinkedList<Token>();
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 11, Operation = Operation.Number });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 0, Operation = Operation.Add });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 23, Operation = Operation.Number });
+            double result = _calculateService.Calculate(testLinkedList, 0);
+            Assert.AreEqual(34, result);
+        }
+
+        [Test]
+        public void Test_Case_6()
+        {
+            // "11.1 + 23"
+            LinkedList<Token> testLinkedList = new LinkedList<Token>();
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 11.1, Operation = Operation.Number });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 0, Operation = Operation.Add });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 23, Operation = Operation.Number });
+            double result = _calculateService.Calculate(testLinkedList, 0);
+            Assert.AreEqual(34.1, result);
+        }
+
+        [Test]
+        public void Test_Case_7()
+        {
+            // "1 + 2 + 3"
+            LinkedList<Token> testLinkedList = new LinkedList<Token>();
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 1, Operation = Operation.Number });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 0, Operation = Operation.Add });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 1, Operation = Operation.Number });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 0, Operation = Operation.Multiply });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 3, Operation = Operation.Number });
+            double result = _calculateService.Calculate(testLinkedList, 0);
+            Assert.AreEqual(4, result);
+        }
+
+        [Test]
+        public void Calculate_Bracket_Return_Correct_Value_1()
+        {
+            // "( 11.5 + 15.4 ) + 10.1"
+            LinkedList<Token> testLinkedList = new LinkedList<Token>();
+            testLinkedList.AddLast(new Token() { Depth = 1, Number = 11.5, Operation = Operation.Number });
+            testLinkedList.AddLast(new Token() { Depth = 1, Number = 0, Operation = Operation.Add });
+            testLinkedList.AddLast(new Token() { Depth = 1, Number = 15.4, Operation = Operation.Number });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 0, Operation = Operation.Add });
+            testLinkedList.AddLast(new Token() { Depth = 0, Number = 10.1, Operation = Operation.Number });
+            double result = _calculateService.Calculate(testLinkedList, 1);
+            Assert.AreEqual(37, result);
+        }
+
+        [Test]
+        public void Calculate_Bracket_Return_Correct_Value_2()
         {
             // "23 - ( 29.3 - 12.5 )"
             LinkedList<Token> testLinkedList = new LinkedList<Token>();
